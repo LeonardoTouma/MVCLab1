@@ -1,8 +1,8 @@
-﻿using MvcLab1._0.Models;
+﻿using MvcLab1._1.Models;
 using System.IO;
 using System.Web.Mvc;
 
-namespace MvcLab1._0.Controllers
+namespace MvcLab1._1.Controllers
 {
     public class PhotoController : Controller
     {
@@ -10,22 +10,6 @@ namespace MvcLab1._0.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-        [HttpPost]
-        public ActionResult Index(Photo photo)
-        {
-            foreach (var file in photo.Files)
-            {
-                if (file.ContentLength > 0)
-                {
-                    var filename = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/Images"), filename);
-                    file.SaveAs(path);
-                }
-            }
-
-            return RedirectToAction("Index");
-
         }
 
         // GET: Photo/Details/5
@@ -41,10 +25,28 @@ namespace MvcLab1._0.Controllers
         }
 
         // POST: Photo/Create
+        [Authorize]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Photo photo)
         {
-            return View();
+            try
+            {
+                foreach (var file in photo.Files)
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        var filename = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/Images"), filename);
+                        file.SaveAs(path);
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Photo/Edit/5

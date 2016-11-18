@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 
-namespace MvcLab1._0.Models
+namespace MvcLab1._1.Models
 {
     public class Photo
     {
