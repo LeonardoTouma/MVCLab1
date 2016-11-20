@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<MvcLab1._1.Models.Photo>
+
+@{
+    ViewBag.Title = "ShowGallary";
+}
+
+<h2>ShowGallary</h2>
+
+<div>
+    <div class="row">
+        <h2>Gallary</h2>
+        @foreach (var item in Model)
+            {
+            <div class="col-md-3 thumbnail">
+                <a href="@item.Path">
+                    <img src="@item.Path" alt="@item.Description" width="200" height="200" />
+                </a>
+                <p>@item.Description</p>
+                @Html.ActionLink("Delete", "Delete", "Photo", new { @id = item.Id }, null)
+            </div>
+        }
+    </div>
+</div>

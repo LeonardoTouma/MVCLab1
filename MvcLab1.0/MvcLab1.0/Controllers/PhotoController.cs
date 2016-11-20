@@ -1,4 +1,5 @@
 ﻿using MvcLab1._0.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
 
@@ -6,6 +7,7 @@ namespace MvcLab1._0.Controllers
 {
     public class PhotoController : Controller
     {
+        List<Photo> photos = new List<Photo>();
         // GET: Photo
         public ActionResult Index()
         {
@@ -29,8 +31,12 @@ namespace MvcLab1._0.Controllers
         }
 
         // GET: Photo/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, Photo photo)
         {
+            foreach (var item in photos)
+            {
+
+            }
             return View();
         }
 
